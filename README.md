@@ -7,4 +7,8 @@ There are two files,*github.py* and *github_join.py*.
 
 - github.py can help you star your own repositories with the account you created with github_join.py.
 
+- acc3.txt is a file of accounts created by me.You can use it directly.
+
+
+
 Thanks for using.
