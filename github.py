@@ -40,7 +40,7 @@ class githack:
         data_encoded = urllib.urlencode(formdata)
         response = self.opener.open(url+'star',data_encoded)
 
-def main(name,repo,num):
+def run(name,repo,num):
     f = open('acc3.txt','r')
     content = f.readline()
     cnt = 0
@@ -63,17 +63,9 @@ def main(name,repo,num):
         time.sleep(1)
     f.close()
 
-main('bloodycoder','skeleton',600)
-main('bloodycoder','pingke',100)
-main('bloodycoder','Zhihu_craw',580)
-main('bloodycoder','website_downloader',100)
-main('bloodycoder','ideaBooster',80)
-main('bloodycoder','VirtualTkinter',512)
-"""
-A = githack()
-token = A.view_login()
-A.login(token,'pighasa100','pighasa1')
-A.star('bloodycoder','craw_books')
-token = A.view_index()
-A.logout(token)
-"""
+run('bloodycoder','skeleton',600)
+run('bloodycoder','pingke',100)
+run('bloodycoder','Zhihu_craw',580)
+run('bloodycoder','website_downloader',100)
+run('bloodycoder','ideaBooster',80)
+run('bloodycoder','VirtualTkinter',512)
