@@ -1,5 +1,5 @@
 # githack
-This is a project that helps you get more stars automatically,which is written in python 2.7.10.
+This is a project that helps you get more github stars automatically,which is written in python 2.7.10.
 
 There are two files,*github.py* and *github_join.py*.
 
