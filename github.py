@@ -39,7 +39,58 @@ class githack:
         formdata = {'utf-8':'✓','authenticity_token':token}
         data_encoded = urllib.urlencode(formdata)
         response = self.opener.open(url+'star',data_encoded)
+    def follow_his_following(self,hisid):
+        """
+        ***
+        this function help you clone someone's following.
+        ***
+        51 persons per page.
+        step.1 get his following num.
+        for i in pages:
+            pass
+        get auth token,and id.
+        done.
 
+        post the token to 
+        https://github.com/users/follow?target=id
+
+        get the next page.
+        """
+        re_getnum = re.compile('All <span class="counter">[^<]+')
+        re_getman = re.compile('<form accept-charset[^<]+')
+        url = ''.join(['https://github.com/',hisid,'/following'])
+        response = self.opener.open(url)
+        html = response.read()
+        num = re_getnum.findall(html)[0][26:]
+        num = int(num.replace(',',''))   #get the num of following
+        if(num%51 == 0):
+            pages = num/51
+        else:
+            pages = 1+num/51 
+        for page in range(1,pages+1):
+            newurl = ''.join([url,'?page=',str(page)])
+            response = self.opener.open(newurl)
+            html = response.read()
+            f = open('pig.html','w')
+            f.write(html)
+            f.close()
+            mans = re_getman.findall(html)[::2][2:]
+            tokens = self.re_auth.findall(html)[1::2][1:]
+            for i in range(len(tokens)):
+                man_to_follow = mans[i].split(' ')[2][8:-1]
+                man_token = tokens[i][41:-3]
+                formdata = {'utf-8':'✓','authenticity_token':man_token}
+                data_encoded = urllib.urlencode(formdata)
+                #response = self.opener.open(url+'star',data_encoded)
+                url_to_post = ''.join(['https://github.com',man_to_follow])
+                response = self.opener.open(url_to_post,data_encoded)
+            return
+git = githack()
+token = git.view_login()
+git.login(token,'bloodycoder','xieyi2dm')
+git.follow_his_following('retronym')
+token = git.view_index()
+git.logout(token)
 def run(name,repo,num):
     f = open('acc3.txt','r')
     content = f.readline()
@@ -62,10 +113,3 @@ def run(name,repo,num):
         cnt = cnt +1
         time.sleep(1)
     f.close()
-
-run('bloodycoder','skeleton',600)
-run('bloodycoder','pingke',100)
-run('bloodycoder','Zhihu_craw',580)
-run('bloodycoder','website_downloader',100)
-run('bloodycoder','ideaBooster',80)
-run('bloodycoder','VirtualTkinter',512)
