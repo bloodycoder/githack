@@ -87,7 +87,7 @@ class githack:
             return
 git = githack()
 token = git.view_login()
-git.login(token,'bloodycoder','xieyi2dm')
+git.login(token,'bloodycoder','xx')
 git.follow_his_following('retronym')
 token = git.view_index()
 git.logout(token)
